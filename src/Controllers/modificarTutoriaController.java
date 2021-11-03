@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class modificarTutoriaController
@@ -17,19 +18,27 @@ public class modificarTutoriaController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public modificarTutoriaController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
+	HttpSession sesion;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
+        /*
+         * Codificación UTF-8.
+         * */
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		sesion = request.getSession(true);
+		
+		 /* Control de sesión.
+         * */
+        if (sesion.getAttribute("Iniciado") == null) {
+            sesion.setAttribute("Iniciado", false);
+        }
+		
+		request.getRequestDispatcher("WEB-INF/views/modificarTutoriaView.jsp").forward(request, response);
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
