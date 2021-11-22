@@ -74,6 +74,21 @@ public class alumnoModel {
 		expLaboral = pexpLaboral;
 		observaciones = pobservaciones;
 	}
+	
+	
+
+	public alumnoModel(String pdni, String pnombre, String papellidos, boolean prepetidor, String pcurso, String pgrupo) {
+		dni = pdni;
+		nombre = pnombre;
+		apellidos = papellidos;
+		repetidor = prepetidor;
+		curso = pcurso;
+		grupo = pgrupo;
+	}
+
+	public alumnoModel() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getDni() {
 		return dni;

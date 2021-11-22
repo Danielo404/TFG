@@ -52,5 +52,20 @@
     }, 1000, 'easeInOutExpo');
     e.preventDefault();
   });
+  
+  $(document).ready(function(){
+	  console.log("inicio");
+	  $("select#pTutoriza").change(function(){
+		  console.log("prueba");
+		  if($("#pTutoriza").val() == "No" )
+			  {
+			  $("#pGrupo").prop("disable", "disable");
+			  }
+		  else{
+			  $("#pGrupo").prop("disable", false);
+		  }
+	  })
+  });
+  
 
 })(jQuery); // End of use strict

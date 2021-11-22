@@ -12,13 +12,13 @@ public class moduloAppService {
 
 	boolean estadoCarga;
 
-	String id;
-	String nombre;
+	int id;
+	String nombreModulo;
 	String siglas;
 	int nHoras;
 
 	final String URL = "jdbc:postgresql://localhost/tfg";
-	final String USER = "root";
+	final String USER = "postgres";
 	final String PASSW = "ROOT";
 
 	public moduloAppService() {
@@ -76,11 +76,47 @@ public class moduloAppService {
 			e.printStackTrace();
 		}
 	}
-
-	public String getId() {
-		id = "";
+	
+	public void consultarProfesorModuloEspecifico(String codigoProfesor) {
 		try {
-			id = cargaModulo.getString("id");
+			establecerConexion();
+			ps = conexion.prepareStatement("SELECT * FROM tutorias.allprofesormodulo WHERE allprofesormodulo.\"codigoProfesor\" = ?");
+			ps.setString(1, codigoProfesor);
+			cargaModulo = ps.executeQuery();
+			cargaModulo.next();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void consultarModuloGrupo(String grupo) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("SELECT * FROM tutorias.allmodulogrupo where \"codigoGrupo\" = ?");
+			ps.setString(1, grupo);
+			cargaModulo = ps.executeQuery();
+			cargaModulo.next();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int getId() {
+		id = 0;
+		try {
+			id = cargaModulo.getInt("id");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	public int getIdModulo() {
+		id = 0;
+		try {
+			id = cargaModulo.getInt("idModulo");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -88,14 +124,15 @@ public class moduloAppService {
 	}
 
 	public String getNombre() {
-		nombre = "";
+		nombreModulo = "";
 		try {
-			nombre = cargaModulo.getString("nombre");
+			nombreModulo = cargaModulo.getString("nombreModulo");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return nombre;
+		return nombreModulo;
 	}
+	
 
 	public String getSiglas() {
 		siglas = "";

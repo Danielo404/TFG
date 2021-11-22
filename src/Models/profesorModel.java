@@ -7,6 +7,9 @@ public class profesorModel {
 	String password;
 	String codigo;
 	String dni;
+	boolean tutoriza;
+	String grupoTutoriza;
+	
 	public profesorModel(String pnombre, String papellidos, String pemail, String ppassword, String pcodigo, String pdni) {
 		super();
 		nombre = pnombre;
@@ -15,6 +18,18 @@ public class profesorModel {
 		password = ppassword;
 		codigo = pcodigo;
 		dni = pdni;
+	}
+	
+	public profesorModel(String pnombre, String papellidos, String pemail, String ppassword, String pcodigo, String pdni, boolean pTutoriza, String pGrupoTutoriza) {
+		super();
+		nombre = pnombre;
+		apellidos = papellidos;
+		email = pemail;
+		password = ppassword;
+		codigo = pcodigo;
+		dni = pdni;
+		tutoriza = pTutoriza;
+		grupoTutoriza = pGrupoTutoriza;
 	}
 	public String getNombre() {
 		return nombre;
@@ -33,6 +48,12 @@ public class profesorModel {
 	}
 	public String getDni() {
 		return dni;
+	}
+	public boolean isTutoriza() {
+		return tutoriza;
+	}
+	public String getGrupoTutoriza() {
+		return grupoTutoriza;
 	}
 	
 	

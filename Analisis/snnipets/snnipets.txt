@@ -1,0 +1,76 @@
+response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		session = request.getSession(true);
+		
+		 if (session.getAttribute("Iniciado") == null) 
+		 {
+	            session.setAttribute("Iniciado", false);
+	     }
+		 
+		 if((boolean)session.getAttribute("Iniciado") == true)
+		 {
+			 
+		 }
+		 else 
+		 {
+			 response.sendRedirect("login");
+		 }
+		 
+		 -------------------------------------------------------------
+		 SELECT "idModulo", "codigoProfesor", "nombre"
+	FROM tutorias.profesormodulo 
+	inner join tutorias.modulo on modulo.id = "idModulo"
+	
+	--------------------------------------------------------------
+	
+	SELECT "idModulo", "codigoProfesor", modulo."nombre", profesor."nombre"
+	FROM tutorias.profesormodulo 
+	inner join tutorias.modulo on modulo.id = "idModulo"
+	inner join tutorias.profesor on profesor.Codigo = "codigoProfesor"
+	
+	-----------------------------------------------------------------------
+	
+	Create view allProfesorModulo
+as
+SELECT "idModulo", "codigoProfesor", "id", modulo."nombre", "nHoras", "siglas", profesor."nombre", "apellidos", "email", "password", "codigo", "dni" 
+	FROM tutorias.profesormodulo 
+	inner join tutorias.modulo on modulo.id = "idModulo"
+	inner join tutorias.profesor on profesor.Codigo = "codigoProfesor"
+	
+	--------------------------------------------------------------------------
+	
+	CREATE function tutorias.datosProfesorModulo(codigoProfesorBusqueda character varying) returns table(idModulo integer, codigoProfesor character varying, id integer, nombreModulo character varying, nHoras integer, siglas character varying, nombreProfesor character varying, email character varying, password character varying, codigo character varying, dni character varying) language sql as $$
+SELECT idModulo, codigoProfesor, id, modulo.nombre, nHoras, siglas, profesor.nombre, apellidos, email, password, codigo, dni 
+	FROM tutorias.profesormodulo 
+	inner join tutorias.modulo on modulo.id = profesormodulo.idModulo
+	inner join tutorias.profesor on profesor.codigo = profesormodulo.codigoProfesor
+	where codigoProfesor = codigoProfesorBusqueda $$;
+	--------------------------------------------------------------------------------
+	
+	where alumnomodulo."idModulo" = 1 and alumno."grupo" = 'A';
+	
+	------------------------------------------------------------------------
+	
+	<div class="row">
+			<% for(int i = 0; i<alumnoResult.size();i++){ %>
+			<div class="col-lg-3">
+				<div class="card p-3" style="width: 100%!important;">
+					<img class="card-img-top w-100" src="/TFG/img/modulo1.jpg" alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title"><%= alumnoResult.get(i).getNombre() %> <%= alumnoResult.get(i).getApellidos()  %></h5>
+						<p class="card-text"><%= alumnoResult.get(i).getCurso()%> <%= alumnoResult.get(i).getGrupo()%></p>
+						<a href="consultarAlumno?dni=<%= alumnoResult.get(i).getDni() %>" class="btn btn-primary w-100">Ver datos del alumno...</a>
+					</div>
+				</div>
+				</div>
+				<%} %>
+			</div>
+			
+			-------------------------------------------------------------
+			PARA COGER ASIGNATURAS TANTO DE 1º COMO DE 2º
+			
+			SELECT "idModulo", "codigoGrupo", nombre
+	FROM tutorias.allmodulogrupo where "codigoGrupo" like '% DAM';
+	
+	
+			

@@ -14,6 +14,17 @@ public class moduloModel {
 		nHoras = pnHoras;
 		siglas = psiglas;
 	}
+	
+	
+
+
+	public moduloModel(int id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+	}
+
+
 
 
 	public int getId() {

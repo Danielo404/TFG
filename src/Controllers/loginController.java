@@ -8,17 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import AppServices.profesorAppService;
+
 /**
  * Servlet implementation class loginController
  */
-@WebServlet("/iniciarSesion")
+@WebServlet("/login")
 public class loginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-	HttpSession sesion;
+	HttpSession session;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -29,12 +31,12 @@ public class loginController extends HttpServlet {
          * */
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		sesion = request.getSession(true);
+		session = request.getSession(true);
 		
 		 /* Control de sesión.
          * */
-        if (sesion.getAttribute("Iniciado") == null) {
-            sesion.setAttribute("Iniciado", false);
+        if (session.getAttribute("Iniciado") == null) {
+            session.setAttribute("Iniciado", false);
         }
 		
 		request.getRequestDispatcher("WEB-INF/views/loginView.jsp").forward(request, response);
@@ -44,8 +46,27 @@ public class loginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		session = request.getSession(true);
+		
+		profesorAppService _profesorAppService = new profesorAppService();
+		
+		try {
+			if(_profesorAppService.iniciarSesion(request.getParameter("pEmail"),request.getParameter("pPassword")))
+			{
+				session.setAttribute("Iniciado", true);
+				session.setAttribute("nombreProfesor", _profesorAppService.getNombre());
+				session.setAttribute("codigoProfesor", _profesorAppService.getCodigo());
+				session.setAttribute("grupoTutorizaProfesor", _profesorAppService.getGrupoTutoriza());
+				response.sendRedirect("Index");
+			}
+			else
+			{
+				doGet(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
 }
