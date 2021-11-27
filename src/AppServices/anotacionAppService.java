@@ -18,6 +18,7 @@ public class anotacionAppService {
 	String alumno;
 	String fecha;
 	String hora;
+	String codigoProfesor;
 	
 	final String URL = "jdbc:postgresql://localhost/tfg";
 	final String USER = "postgres";
@@ -52,8 +53,47 @@ public class anotacionAppService {
 		}
 		return estadoCarga;
 	}
+	
+	public int consultarUltimoId() {
+		int ultimoId = 0;
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("SELECT \"idAnotacion\" FROM tutorias.anotacion order by \"idAnotacion\" desc limit 1");
+			ResultSet e = ps.executeQuery();
+			e.next();
+			ultimoId = e.getInt("idAnotacion") + 1;
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ultimoId;
+	}
+	
+	public void crearTutoria(int idAnotacion, String tipo, String texto, String alumno, String fecha, String hora, String codigoProfesor) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("INSERT INTO tutorias.anotacion (\"idAnotacion\", tipo, texto, alumno, fecha, hora, \"codigoProfesor\") VALUES (?, ?, ?, ?, ?, ?, ?)");
+			ps.setInt(1, idAnotacion);
+			ps.setString(2, tipo);
+			ps.setString(3, texto);
+			ps.setString(4, alumno);
+			ps.setString(5, fecha);
+			ps.setString(6, hora);
+			ps.setString(7, codigoProfesor);
+			ps.execute();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public int getIdAnotacion() {
+		idAnotacion = 0;
+		try {
+			idAnotacion = cargaAnotacion.getInt("idAnotacion");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return idAnotacion;
 	}
 
@@ -68,6 +108,7 @@ public class anotacionAppService {
 	}
 
 	public String getTexto() {
+		texto = "";
 		try {
 			texto = cargaAnotacion.getString("texto");
 		} catch (Exception e) {
@@ -77,6 +118,7 @@ public class anotacionAppService {
 	}
 
 	public String getAlumno() {
+		alumno = "";
 		try {
 			alumno = cargaAnotacion.getString("alumno");
 		} catch (Exception e) {
@@ -86,6 +128,7 @@ public class anotacionAppService {
 	}
 
 	public String getFecha() {
+		fecha = "";
 		try {
 			fecha = cargaAnotacion.getString("fecha");
 		} catch (Exception e) {
@@ -95,12 +138,23 @@ public class anotacionAppService {
 	}
 
 	public String getHora() {
+		hora = "";
 		try {
 			hora = cargaAnotacion.getString("hora");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return hora;
+	}
+	
+	public String getcodigoProfesor() {
+		codigoProfesor = "";
+		try {
+			codigoProfesor = cargaAnotacion.getString("codigoProfesor");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return codigoProfesor;
 	}
 	
 	

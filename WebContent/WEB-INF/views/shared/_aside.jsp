@@ -20,7 +20,7 @@
                 <i class="fas fa-book-reader fa-fw"></i>
                 <span >Mis módulos</span></a>
         </li>
-
+	<%if(session.getAttribute("grupoTutorizaProfesor") != null){ %>
         <!-- Divider -->
         <hr class="sidebar-divider">
         
@@ -43,13 +43,12 @@
                     <a class="collapse-item" href="consultarGrupoModulo">Consultar módulos</a>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Tutorías</h6>
-                    <a class="collapse-item" href="consultarAlumnoTutoria">Consultar alumnos</a>
+                    <a class="collapse-item" href="consultarAlumnosPorCurso">Consultar alumnos</a>
                     <a class="collapse-item" href="misTutorias">Mis tutorías</a>
-                    <a class="collapse-item" href="crearAnotacion">Crear anotación</a>
                 </div>
             </div>
         </li>
-
+		<% } %>
         <!-- Heading
         <div class="sidebar-heading">
             Interface
@@ -91,8 +90,8 @@
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Utilidades</h6>
-                    <a class="collapse-item" href="enviarCorreo">Enviar correo</a>
-                    <a class="collapse-item" href="enviarNotificacion">Enviar notificación</a>
+                    <a class="collapse-item" href="consultarNotificacion">Ver notificaciones</a>
+                    <a class="collapse-item" href="crearNotificacion">Enviar notificación</a>
                    
                 </div>
             </div>

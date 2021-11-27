@@ -57,6 +57,7 @@ public class loginController extends HttpServlet {
 			{
 				session.setAttribute("Iniciado", true);
 				session.setAttribute("nombreProfesor", _profesorAppService.getNombre());
+				session.setAttribute("apellidosProfesor", _profesorAppService.getApellidos());
 				session.setAttribute("codigoProfesor", _profesorAppService.getCodigo());
 				session.setAttribute("grupoTutorizaProfesor", _profesorAppService.getGrupoTutoriza());
 				response.sendRedirect("Index");

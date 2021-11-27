@@ -82,8 +82,9 @@
 				<div class="row mt-4">
 					<div class="col-lg-3" name="">
 						<div class="form-group">
+						<% String resulRepetidor = ""; if(alumnoResult.isRepetidor()== true){ resulRepetidor ="Sí";}else{resulRepetidor = "No";} %>
 							<label for="">Repetidor:</label> <input id="" name="" type="text"
-								class="form-control" value="<%=alumnoResult.isRepetidor()%>"
+								class="form-control" value="<%=resulRepetidor%>"
 								readonly>
 						</div>
 					</div>
@@ -112,8 +113,9 @@
 				<div class="row">
 					<div class="col-lg-3" name="">
 						<div class="form-group">
+						<% String resulPortatil = ""; if(alumnoResult.isPortatil()== true){ resulPortatil ="Sí";}else{resulPortatil = "No";} %>
 							<label for="">Portátil:</label> <input id="" name="" type="text"
-								class="form-control" value="<%=alumnoResult.isPortatil()%>"
+								class="form-control" value="<%= resulPortatil %>"
 								readonly>
 						</div>
 					</div>
@@ -126,8 +128,9 @@
 					</div>
 					<div class="col-lg-3" name="">
 						<div class="form-group">
+						<% String resulErasmus = ""; if(alumnoResult.isErasmus()== true){ resulErasmus ="Sí";}else{resulErasmus = "No";} %>
 							<label for="">Erasmus:</label> <input id="" name="" type="text"
-								class="form-control" value="<%=alumnoResult.isErasmus()%>"
+								class="form-control" value="<%= resulErasmus%>"
 								readonly>
 						</div>
 					</div>
@@ -177,7 +180,8 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6" name="">
-						<% if(session.getAttribute("tutor")!= null){ %>
+						<% String grupoTutorizProfesor = (String)session.getAttribute("grupoTutorizaProfesor");
+						if(grupoTutorizProfesor.equals(alumnoResult.getGrupo())) { %>
 						<a href="crearTutoria?dni=<%= alumnoResult.getDni() %>" class="btn btn-primary w-100 p-3">Concertar tutoría</a>
 						<%} %>
 					</div>

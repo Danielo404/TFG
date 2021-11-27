@@ -90,6 +90,19 @@ public class profesorAppService {
 		}
 	}
 	
+public void consultarProfesores() {
+		
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("select * from tutorias.profesor");
+			cargaProfesor = ps.executeQuery();
+			cargaProfesor.next();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 public void cambiarContrasena(String codigo, String password) {
 		
 		try {

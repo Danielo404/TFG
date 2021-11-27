@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import AppServices.alumnoAppService;
-import Models.alumnoModel;
-import Models.grupoModel;
+import AppServices.notificacionAppService;
+import Models.notificacionModel;
 
 /**
- * Servlet implementation class consultarAlumnosPorCursoController
+ * Servlet implementation class consultarNotificacionController
  */
-@WebServlet("/consultarAlumnosPorCurso")
-public class consultarAlumnosPorCursoController extends HttpServlet {
+@WebServlet("/consultarNotificacion")
+public class consultarNotificacionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -34,9 +33,6 @@ public class consultarAlumnosPorCursoController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		session = request.getSession(true);
 		
-		alumnoAppService _alumnoAppService = new alumnoAppService();
-		ArrayList<alumnoModel> alumnoResult = new ArrayList<alumnoModel>();
-		
 		 if (session.getAttribute("Iniciado") == null) 
 		 {
 	            session.setAttribute("Iniciado", false);
@@ -45,21 +41,25 @@ public class consultarAlumnosPorCursoController extends HttpServlet {
 		 if((boolean)session.getAttribute("Iniciado") == true)
 		 {
 			 try {
-				 _alumnoAppService.consultarAlumnosPorGrupo((String)session.getAttribute("grupoTutorizaProfesor"));
-				 
-				 
-				 do {
-					 alumnoResult.add(new alumnoModel(_alumnoAppService.getDni(), _alumnoAppService.getNombre(), _alumnoAppService.getApellidos(), _alumnoAppService.isRepetidor(), _alumnoAppService.getCurso(),_alumnoAppService.getGrupo()));
-					 
-				 }while(_alumnoAppService.consultarSiguiente());
-				 
-				 session.setAttribute("alumnoResult", alumnoResult);
-				 
-				 request.getRequestDispatcher("WEB-INF/views/consultarAlumnosPorCurso.jsp").forward(request, response);
-
-			 } catch (Exception e) {
+				notificacionAppService _notificacionAppService = new notificacionAppService();
+				ArrayList<notificacionModel> notificacionResult = new ArrayList<notificacionModel>();
+				
+				_notificacionAppService.consultarNotificaciones((String)session.getAttribute("codigoProfesor"));
+				
+				while(_notificacionAppService.consultarSiguiente() == true)
+				{
+					notificacionResult.add(new notificacionModel(_notificacionAppService.getIdNotificacion(),
+							_notificacionAppService.getFecha(),
+							_notificacionAppService.getTitulo(),
+							_notificacionAppService.getTexto(),
+							_notificacionAppService.getEmisor()));
+				}
+				
+				session.setAttribute("notificacionResult", notificacionResult);
+				request.getRequestDispatcher("WEB-INF/views/consultarNotificacionView.jsp").forward(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
-			} 
+			}
 		 }
 		 else 
 		 {

@@ -1,12 +1,19 @@
 package Controllers;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import AppServices.alumnoAppService;
+import AppServices.anotacionAppService;
+import Models.alumnoModel;
 
 /**
  * Servlet implementation class crearTutoriaController
@@ -18,34 +25,75 @@ public class crearTutoriaController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-	HttpSession sesion;
+	HttpSession session;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /*
-         * Codificación UTF-8.
-         * */
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		sesion = request.getSession(true);
+		session = request.getSession(true);
 		
-		 /* Control de sesión.
-         * */
-        if (sesion.getAttribute("Iniciado") == null) {
-            sesion.setAttribute("Iniciado", false);
-        }
+		 if (session.getAttribute("Iniciado") == null) 
+		 {
+	            session.setAttribute("Iniciado", false);
+	     }
+		 
+		 if((boolean)session.getAttribute("Iniciado") == true)
+		 {
+			 try {
+				 alumnoModel alumnoResult;
+				 alumnoAppService _alumnoAppService = new alumnoAppService();
+				 _alumnoAppService.consultarAlumno(request.getParameter("dni"));
+				 
+				 alumnoResult = new alumnoModel(_alumnoAppService.getDni(),
+						 _alumnoAppService.getNombre(),
+						 _alumnoAppService.getApellidos(),
+						 _alumnoAppService.isRepetidor(),
+						 _alumnoAppService.getCurso(),
+						 _alumnoAppService.getGrupo());
+				 
+				 session.setAttribute("alumnoResult", alumnoResult);
+				 
+				 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				   LocalDateTime now = LocalDateTime.now();
+				     
+				 session.setAttribute("fechaMinima", dtf.format(now));
+				 request.getRequestDispatcher("WEB-INF/views/crearTutoriaView.jsp").forward(request, response);
+				 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		 }
+		 else 
+		 {
+			 response.sendRedirect("login");
+		 }
 		
-		request.getRequestDispatcher("WEB-INF/views/crearTutoriaView.jsp").forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			anotacionAppService _anotacionAppService = new anotacionAppService();
+			int ultimoId = _anotacionAppService.consultarUltimoId();
+			
+			_anotacionAppService.crearTutoria(ultimoId,
+					request.getParameter("pTipo"),
+					request.getParameter("pTexto"),
+					request.getParameter("pDni"),
+					request.getParameter("pFecha"),
+					request.getParameter("pHora"),
+					(String)session.getAttribute("codigoProfesor"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		response.sendRedirect("consultarTutoria");
 	}
 
 }

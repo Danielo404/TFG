@@ -104,6 +104,19 @@ public class alumnoAppService {
 		}
 	}
 	
+	public void consultarAlumnosPorGrupo(String grupo) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("SELECT * FROM tutorias.alumno WHERE grupo = ?");
+			ps.setString(1, grupo);
+			cargaAlumno = ps.executeQuery();
+			cargaAlumno.next();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void consultarAlumno(String dni) {
 		try {
 			establecerConexion();

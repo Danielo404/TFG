@@ -31,6 +31,15 @@ public class profesorModel {
 		tutoriza = pTutoriza;
 		grupoTutoriza = pGrupoTutoriza;
 	}
+	
+	
+	public profesorModel(String nombre, String apellidos, String codigo) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.codigo = codigo;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

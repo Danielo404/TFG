@@ -11285,3 +11285,12 @@ body.sidebar-toggled footer.sticky-footer {
   margin-left: auto;
   margin-right: auto;
 }
+
+.acordeonfondo{
+	background-color: #4e73df !important;
+	
+}
+
+.text-white{
+	color: white !important;
+}
