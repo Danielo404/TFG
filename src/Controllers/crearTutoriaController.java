@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import AppServices.alumnoAppService;
 import AppServices.anotacionAppService;
+import Mailer.mailerUtils;
+import Mailer.mailerUtils2;
 import Models.alumnoModel;
 
 /**
@@ -56,10 +58,6 @@ public class crearTutoriaController extends HttpServlet {
 				 
 				 session.setAttribute("alumnoResult", alumnoResult);
 				 
-				 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				   LocalDateTime now = LocalDateTime.now();
-				     
-				 session.setAttribute("fechaMinima", dtf.format(now));
 				 request.getRequestDispatcher("WEB-INF/views/crearTutoriaView.jsp").forward(request, response);
 				 
 			} catch (Exception e) {
@@ -82,6 +80,9 @@ public class crearTutoriaController extends HttpServlet {
 		try {
 			anotacionAppService _anotacionAppService = new anotacionAppService();
 			int ultimoId = _anotacionAppService.consultarUltimoId();
+			alumnoAppService _alumnoAppService = new alumnoAppService();
+			_alumnoAppService.consultarAlumno(request.getParameter("pDni"));
+			mailerUtils _mailerUtils = new mailerUtils();
 			
 			_anotacionAppService.crearTutoria(ultimoId,
 					request.getParameter("pTipo"),
@@ -90,6 +91,9 @@ public class crearTutoriaController extends HttpServlet {
 					request.getParameter("pFecha"),
 					request.getParameter("pHora"),
 					(String)session.getAttribute("codigoProfesor"));
+			
+			//_mailerUtils.enviar(_alumnoAppService.getEmail(), "Tutoría " + request.getParameter("pFecha") + " " + request.getParameter("pHora"), request.getParameter("pTexto"));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

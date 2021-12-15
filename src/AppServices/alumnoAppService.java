@@ -32,6 +32,7 @@ public class alumnoAppService {
 	String expLaboral;
 	String observaciones;
 	String auxNombreModulo;
+	String email;
 	
 	final String URL = "jdbc:postgresql://localhost/tfg";
 	final String USER = "postgres";
@@ -143,11 +144,11 @@ public class alumnoAppService {
 		}
 	}
 	
-	public void anadirAlumno(String dni, String nombre, String apellidos, boolean repetidor, String curso, String fechaNacimiento, String localidad, String grupo, String cicloEstudiar, String fechaIncorporacion, String medioTransporte, String procedencia, String estudiosPrevios, boolean portatil, String macPortatil, String nivelIngles, boolean erasmus, String expLaboral, String observaciones)
+	public void anadirAlumno(String dni, String nombre, String apellidos, boolean repetidor, String curso, String fechaNacimiento, String localidad, String grupo, String cicloEstudiar, String fechaIncorporacion, String medioTransporte, String procedencia, String estudiosPrevios, boolean portatil, String macPortatil, String nivelIngles, boolean erasmus, String expLaboral, String observaciones, String email)
 	{
 		try {
 			establecerConexion();
-			ps = conexion.prepareStatement("INSERT INTO tutorias.alumno (dni, nombre, apellidos, repetidor, curso, \"fechaNacimiento\", localidad, grupo, \"cicloEstudiar\", \"fechaIncorporacion\", \"medioTransporte\", procedencia, \"estudiosPrevios\", portatil, \"macPortatil\", \"nivelIngles\", erasmus, \"expLaboral\", observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			ps = conexion.prepareStatement("INSERT INTO tutorias.alumno (dni, nombre, apellidos, repetidor, curso, \"fechaNacimiento\", localidad, grupo, \"cicloEstudiar\", \"fechaIncorporacion\", \"medioTransporte\", procedencia, \"estudiosPrevios\", portatil, \"macPortatil\", \"nivelIngles\", erasmus, \"expLaboral\", observaciones, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, dni);
 			ps.setString(2, nombre);
 			ps.setString(3, apellidos);
@@ -167,6 +168,42 @@ public class alumnoAppService {
 			ps.setBoolean(17, erasmus);
 			ps.setString(18, expLaboral);
 			ps.setString(19, observaciones);
+			ps.setString(20, email);
+			
+			ps.execute();
+			
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void modificarAlumno(String dni, String nombre, String apellidos, boolean repetidor, String curso, String fechaNacimiento, String localidad, String grupo, String cicloEstudiar, String fechaIncorporacion, String medioTransporte, String procedencia, String estudiosPrevios, boolean portatil, String macPortatil, String nivelIngles, boolean erasmus, String expLaboral, String observaciones, String email)
+	{
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("UPDATE tutorias.alumno SET dni=?, nombre=?, apellidos=?, repetidor=?, curso=?, \"fechaNacimiento\"=?, localidad=?, grupo=?, \"cicloEstudiar\"=?, \"fechaIncorporacion\"=?, \"medioTransporte\"=?, procedencia=?, \"estudiosPrevios\"=?, portatil=?, \"macPortatil\"=?, \"nivelIngles\"=?, erasmus=?, \"expLaboral\"=?, observaciones=?, email=? WHERE dni = ?");
+			ps.setString(1, dni);
+			ps.setString(2, nombre);
+			ps.setString(3, apellidos);
+			ps.setBoolean(4, repetidor);
+			ps.setString(5, curso);
+			ps.setString(6, fechaNacimiento);
+			ps.setString(7, localidad);
+			ps.setString(8, grupo);
+			ps.setString(9, cicloEstudiar);
+			ps.setString(10, fechaIncorporacion);
+			ps.setString(11, medioTransporte);
+			ps.setString(12, procedencia);
+			ps.setString(13, estudiosPrevios);
+			ps.setBoolean(14, portatil);
+			ps.setString(15, macPortatil);
+			ps.setString(16, nivelIngles);
+			ps.setBoolean(17, erasmus);
+			ps.setString(18, expLaboral);
+			ps.setString(19, observaciones);
+			ps.setString(20, email);
+			ps.setString(21, dni);
 			
 			ps.execute();
 			
@@ -204,6 +241,61 @@ public class alumnoAppService {
 			e.printStackTrace();
 		}
 	}
+	
+	public void eliminarClavesForaneas(String dni) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("DELETE FROM tutorias.alumnomodulo WHERE \"dniAlumno\" = ?");
+			ps.setString(1, dni);
+			ps.execute();
+			ps = conexion.prepareStatement("DELETE FROM tutorias.anotacion WHERE alumno = ?");
+			ps.setString(1, dni);
+			ps.execute();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarAlumno(String dni) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("DELETE FROM tutorias.alumno WHERE dni = ?");
+			ps.setString(1, dni);
+			ps.execute();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void asignarModulo(String dni, int idModulo) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("INSERT INTO tutorias.alumnomodulo (\"idModulo\", \"dniAlumno\") VALUES (?, ?)");
+			ps.setInt(1, idModulo);
+			ps.setString(2, dni);
+			ps.execute();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void consultarCursos() {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("SELECT distinct curso FROM tutorias.alumno order by curso");
+			cargaAlumno = ps.executeQuery();
+			cargaAlumno.next();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	public String getDni() {
 		dni = "";
@@ -404,6 +496,21 @@ public class alumnoAppService {
 		}
 		return auxNombreModulo;
 	}
+	
+	public String getEmail() {
+		email = "";
+		try {
+			email = cargaAlumno.getString("email"); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return email;
+	}
+
+
+
+
+	
 	
 	
 }

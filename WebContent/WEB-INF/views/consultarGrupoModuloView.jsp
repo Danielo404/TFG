@@ -28,7 +28,7 @@
 			<% for(int i = 0; i<moduloResult.size();i++){ %>
 			<div class="col-lg-4">
 				<div class="card p-3" style="width: 100%!important;">
-					<img class="card-img-top w-100" src="/TFG/img/modulo1.jpg" alt="Card image cap">
+					<img class="card-img-top w-100" src="/TFG/img/mod_<%= moduloResult.get(i).getId()%>.jpg" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title"><%= moduloResult.get(i).getNombre() %></h5>
 						<a href="consultarAlumnado?idModulo=<%= moduloResult.get(i).getId() %>&grupo=<%=(String)session.getAttribute("grupoTutorizaProfesor") %>" class="btn btn-primary w-100">Ver alumnos...</a>

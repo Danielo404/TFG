@@ -25,7 +25,7 @@
 			<% for(int i = 0; i<grupos.size();i++){ %>
 			<div class="col-lg-4">
 				<div class="card p-3" style="width: 100%!important;">
-					<img class="card-img-top w-100" src="/TFG/img/modulo1.jpg" alt="Card image cap">
+					<img class="card-img-top w-100" src="/TFG/img/grupomodulo.jpg" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title text-center">Grupo <%= grupos.get(i).getCodigo() %></h5>
 						<p class="card-text"><%= grupos.get(i).getNombre()%></p>

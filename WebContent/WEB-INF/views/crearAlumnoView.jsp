@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession" %>
-<% HttpSession sesion = request.getSession(); %>
+
 
 <jsp:include page="shared/_header.jsp">
 	<jsp:param name="tituloPagina" value="Acerca de" />
@@ -117,6 +116,15 @@
         <option value="2º STI">2 STI</option>
       </select>
     </div> 
+    </div>
+  </div>
+  <div class="form-group">
+  <label></label>
+  <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">Email</div>
+      </div> 
+      <input id="pEmail" name="pEmail" type="text" required="required" class="form-control">
     </div>
   </div>
   <div class="form-group">

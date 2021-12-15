@@ -91,7 +91,7 @@
 										<div class="form-group">
 											<label for="pTutoriza">Tutoriza</label>
 											<div>
-												<select id="pTutoriza" name="pTutoriza" required="required"
+												<select id="tutoriza" name="pTutoriza" required="required"
 													class="custom-select">
 													<option value="Sí">Sí</option>
 													<option value="No">No</option>
@@ -100,8 +100,8 @@
 										</div>
 									</div>
 									<div class="col-sm-6">
-										<label for="pGrupo">Grupos</label> <select id="pGrupo"
-											name="pGrupo" required="required" class="custom-select">
+										<label for="pGrupo">Grupos</label> <select id="grupo"
+											name="pGrupo" class="custom-select">
 											<%
 												for (int i = 0; i < gruposResult.size(); i++) {
 											%>
@@ -117,12 +117,9 @@
 									Dar de alta</button>
 							</form>
 							<hr>
+							
 							<div class="text-center">
-								<a class="small" href="/TFG/olvidasteContraseña">¿Has
-									olvidado la contraseña?</a>
-							</div>
-							<div class="text-center">
-								<a class="small" href="/TFG/login">¿Estás dado de alta?
+								<a class="small" href="login">¿Estás dado de alta?
 									¡Inicia sesión!</a>
 							</div>
 						</div>
@@ -136,6 +133,8 @@
 	<!-- Bootstrap core JavaScript-->
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/TFG/js/sb-admin-2.min.js"></script>
+	
 
 	<!-- Core plugin JavaScript-->
 	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>

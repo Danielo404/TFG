@@ -129,11 +129,12 @@ public class crearAlumnoController extends HttpServlet {
 						request.getParameter("pIngles"),
 						erasmus,
 						request.getParameter("pExperienciaLaboral"),
-						request.getParameter("pObservaciones"));
-				response.sendRedirect("asignarAlumno");
+						request.getParameter("pObservaciones"),
+						request.getParameter("pEmail"));
+				response.sendRedirect("asignarAlumno?dni=" + request.getParameter("pdni"));
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}

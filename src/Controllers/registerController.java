@@ -74,16 +74,22 @@ public class registerController extends HttpServlet {
 			}
 			else
 			{
-				_profesorAppService.darDeAlta(request.getParameter("pNombre"),
+				boolean tutoriza = (request.getParameter("pTutoriza").equals("Sí")) ?true:false;
+				String grupoTutoriza = (tutoriza == true) ?request.getParameter("pGrupo"):null;
+				
+				_profesorAppService.darDeAltaCompleto(request.getParameter("pNombre"),
 						request.getParameter("pApellidos"),
 						request.getParameter("pCodigo"),
 						request.getParameter("pDni"),
 						request.getParameter("pEmail"),
-						request.getParameter("pPassword"));
-				response.sendRedirect("login");
+						request.getParameter("pPassword"),
+						tutoriza,
+						grupoTutoriza);
+				session.setAttribute("codigoProfesor", request.getParameter("pCodigo"));
+				response.sendRedirect("asignarProfesor?codigo=" + request.getParameter("pCodigo"));
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 

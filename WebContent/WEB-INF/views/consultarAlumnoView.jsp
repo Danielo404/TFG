@@ -25,7 +25,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-3">
-						<img src="/TFG/img/default_profile.png" class="w-75 rounded img-center-custom">
+						<img src="/TFG/img/al_<%=alumnoResult.getDni() %>.png" class="w-75 rounded img-center-custom">
 					</div>
 					<div class="col-lg-9">
 						<div class="row">
@@ -73,6 +73,15 @@
 								<div class="form-group">
 									<label for="">Grupo:</label> <input id="" name="" type="text"
 										class="form-control" value="<%=alumnoResult.getGrupo()%>"
+										readonly>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12" name="">
+								<div class="form-group">
+									<label for="">Email:</label> <input id="" name="" type="text"
+										class="form-control" value="<%=alumnoResult.getEmail()%>"
 										readonly>
 								</div>
 							</div>
@@ -180,9 +189,11 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6" name="">
+					<%if(session.getAttribute("grupoTutorizaProfesor") != null){ %>
 						<% String grupoTutorizProfesor = (String)session.getAttribute("grupoTutorizaProfesor");
 						if(grupoTutorizProfesor.equals(alumnoResult.getGrupo())) { %>
 						<a href="crearTutoria?dni=<%= alumnoResult.getDni() %>" class="btn btn-primary w-100 p-3">Concertar tutoría</a>
+						<%} %>
 						<%} %>
 					</div>
 					<div class="col-lg-6" name="">

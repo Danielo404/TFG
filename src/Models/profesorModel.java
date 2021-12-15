@@ -39,6 +39,16 @@ public class profesorModel {
 		this.apellidos = apellidos;
 		this.codigo = codigo;
 	}
+	
+
+	public profesorModel(String nombre, String apellidos, String email, String codigo, String grupoTutoriza) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.email = email;
+		this.codigo = codigo;
+		this.grupoTutoriza = grupoTutoriza;
+	}
 
 	public String getNombre() {
 		return nombre;

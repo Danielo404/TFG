@@ -8,6 +8,7 @@ public class anotacionModel {
 	String fecha;
 	String hora;
 	String codigoProfesor;
+	alumnoModel _alumno;
 	
 	
 	
@@ -21,6 +22,19 @@ public class anotacionModel {
 		fecha = pfecha;
 		hora = phora;
 		codigoProfesor = pcodigoProfesor;
+	}
+	
+	public anotacionModel(int pidAnotacion, String ptipo, String ptexto, String palumno, String pfecha,
+			String phora, String pcodigoProfesor, alumnoModel p_alumno) {
+		
+		idAnotacion = pidAnotacion;
+		tipo = ptipo;
+		texto = ptexto;
+		alumno = palumno;
+		fecha = pfecha;
+		hora = phora;
+		codigoProfesor = pcodigoProfesor;
+		_alumno = p_alumno;
 	}
 
 	public int getIdAnotacion() {
@@ -50,6 +64,10 @@ public class anotacionModel {
 	
 	public String getcodigoProfesor() {
 		return codigoProfesor;
+	}
+
+	public alumnoModel get_alumno() {
+		return _alumno;
 	}
 	
 	

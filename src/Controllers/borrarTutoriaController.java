@@ -8,36 +8,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import AppServices.anotacionAppService;
+
 /**
  * Servlet implementation class borrarTutoriaController
  */
-@WebServlet("/borrarTutoria")
+@WebServlet("/eliminarTutoria")
 public class borrarTutoriaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-	HttpSession sesion;
+	HttpSession session;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /*
-         * Codificación UTF-8.
-         * */
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		sesion = request.getSession(true);
+		session = request.getSession(true);
 		
-		 /* Control de sesión.
-         * */
-        if (sesion.getAttribute("Iniciado") == null) {
-            sesion.setAttribute("Iniciado", false);
-        }
+		 if (session.getAttribute("Iniciado") == null) 
+		 {
+	            session.setAttribute("Iniciado", false);
+	     }
+		 
+		 if((boolean)session.getAttribute("Iniciado") == true)
+		 {
+			 anotacionAppService _anotacionAppService = new anotacionAppService();
+			 _anotacionAppService.eliminarTutoria(Integer.parseInt(request.getParameter("idAnotacion")));
+			 
+			 response.sendRedirect("consultarTutoria");
+		 }
+		 else 
+		 {
+			 response.sendRedirect("login");
+		 }
 		
-		request.getRequestDispatcher("WEB-INF/views/borrarTutoriaView.jsp").forward(request, response);
 	}
 
 	/**

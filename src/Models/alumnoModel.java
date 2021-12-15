@@ -21,6 +21,7 @@ public class alumnoModel {
 	boolean erasmus;
 	String expLaboral;
 	String observaciones;
+	String email;
 	
 	public alumnoModel(String pdni, String pnombre, String papellidos, boolean prepetidor, byte[] pfoto, String pcurso,
 			String pfechaNacimiento, String plocalidad, String pgrupo, String pcicloEstudiar, String pfechaIncorporacion,
@@ -74,6 +75,32 @@ public class alumnoModel {
 		expLaboral = pexpLaboral;
 		observaciones = pobservaciones;
 	}
+	public alumnoModel(String pdni, String pnombre, String papellidos, boolean prepetidor, String pcurso,
+			String pfechaNacimiento, String plocalidad, String pgrupo, String pcicloEstudiar, String pfechaIncorporacion,
+			String pmedioTransporte, String pprocedencia, String pestudiosPrevios, boolean pportatil, String pmacPortatil,
+			String pnivelIngles, boolean perasmus, String pexpLaboral, String pobservaciones, String pemail) {
+		
+		dni = pdni;
+		nombre = pnombre;
+		apellidos = papellidos;
+		repetidor = prepetidor;
+		curso = pcurso;
+		fechaNacimiento = pfechaNacimiento;
+		localidad = plocalidad;
+		grupo = pgrupo;
+		cicloEstudiar = pcicloEstudiar;
+		fechaIncorporacion = pfechaIncorporacion;
+		medioTransporte = pmedioTransporte;
+		procedencia = pprocedencia;
+		estudiosPrevios = pestudiosPrevios;
+		portatil = pportatil;
+		macPortatil = pmacPortatil;
+		nivelIngles = pnivelIngles;
+		erasmus = perasmus;
+		expLaboral = pexpLaboral;
+		observaciones = pobservaciones;
+		email = pemail;
+	}
 	
 	
 
@@ -84,6 +111,16 @@ public class alumnoModel {
 		repetidor = prepetidor;
 		curso = pcurso;
 		grupo = pgrupo;
+	}
+	
+	public alumnoModel(String pdni, String pnombre, String papellidos, boolean prepetidor, String pcurso, String pgrupo, String pemail) {
+		dni = pdni;
+		nombre = pnombre;
+		apellidos = papellidos;
+		repetidor = prepetidor;
+		curso = pcurso;
+		grupo = pgrupo;
+		email = pemail;
 	}
 
 	public alumnoModel() {
@@ -168,6 +205,10 @@ public class alumnoModel {
 
 	public String getObservaciones() {
 		return observaciones;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 	
 	

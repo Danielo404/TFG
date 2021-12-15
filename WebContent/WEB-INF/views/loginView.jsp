@@ -76,9 +76,6 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="/TFG/olvidasteContraseña">¿Has olvidado la contraseña?</a>
-                                    </div>
-                                    <div class="text-center">
                                         <a class="small" href="/TFG/register">Crea una cuenta</a>
                                     </div>
                                 </div>

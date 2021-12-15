@@ -102,6 +102,20 @@ public class moduloAppService {
 			e.printStackTrace();
 		}
 	}
+	
+	public void cargarModulosAsignacion(String grupo) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("SELECT  * FROM tutorias.allmodulogrupo where \"codigoGrupo\" like '% "+grupo+"'");
+			
+			cargaModulo = ps.executeQuery();
+			cargaModulo.next();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	public int getId() {
 		id = 0;
@@ -153,5 +167,7 @@ public class moduloAppService {
 		}
 		return nHoras;
 	}
+
+	
 
 }

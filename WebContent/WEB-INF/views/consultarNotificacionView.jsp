@@ -27,12 +27,13 @@
 			<%
 				if (notificacionResult.size() > 0) {
 			%>
+			<div class="accordion" id="accordionNotificacion">
 			<%
 				for (int i = 0; i < notificacionResult.size(); i++) {
 			%>
 
-			<div class="accordion" id="accordionNotificacion">
-				<div class="card">
+			
+				<div class="card mt-3">
 					<div class="card-header acordeonfondo" id="heading_id_<%=notificacionResult.get(i).getIdNotificacion() %>">
 						<h2 class="mb-0">
 							<button class="btn btn-link btn-block text-center text-white" type="button"
@@ -49,11 +50,12 @@
 						<%=notificacionResult.get(i).getTexto() %></div>
 					</div>
 				</div>
-			</div>
+			
 
 			<%
 				}
 			%>
+			</div>
 			<%
 				}
 			%>

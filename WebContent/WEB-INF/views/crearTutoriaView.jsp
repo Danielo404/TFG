@@ -103,14 +103,14 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="form-group">
-								<label for="pTitulo">Fecha</label> <input id="pFecha" type="date" min="<%= (String)session.getAttribute("fechaMinima") %>"
+								<label for="pTitulo">Fecha</label> <input id="pFecha" type="date" 
 									name="pFecha" placeholder="Titulo" type="text"
 									class="form-control" required="required">
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
-								<label for="pTitulo">Hora</label> <input id="pHora" type="time" min="08:00" max="20:00"
+								<label for="pTitulo">Hora</label> <input id="pHora" type="time"
 									name="pHora" placeholder="Titulo" type="text"
 									class="form-control" required="required">
 							</div>

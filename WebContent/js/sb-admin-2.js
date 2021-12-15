@@ -55,17 +55,25 @@
   
   $(document).ready(function(){
 	  console.log("inicio");
-	  $("select#pTutoriza").change(function(){
+	  $("select#tutoriza option[value='No']").attr("selected", true);
+	  if($("#tutoriza").val() == "No" )
+	  {
+	  console.log("Entra en no");
+	  $("#grupo").prop("disabled", true);
+	  }
+	  $("select#tutoriza").change(function(){
 		  console.log("prueba");
-		  if($("#pTutoriza").val() == "No" )
+		  
+		  if($("#tutoriza").val() == "No" )
 			  {
-			  $("#pGrupo").prop("disable", "disable");
+			  console.log("Entra en no");
+			  $("#grupo").prop("disabled", true);
 			  }
 		  else{
-			  $("#pGrupo").prop("disable", false);
+			  $("#grupo").prop("disabled", false);
 		  }
 	  })
-  });
+});
   
 
 })(jQuery); // End of use strict

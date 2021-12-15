@@ -86,6 +86,61 @@ public class anotacionAppService {
 			e.printStackTrace();
 		}
 	}
+	
+	public void consultarTutoria(int idAnotacion) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("SELECT * FROM tutorias.anotacion where \"idAnotacion\" = ?");
+			ps.setInt(1, idAnotacion);
+			cargaAnotacion = ps.executeQuery();
+			cargaAnotacion.next();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void consultarTutorias(String codigoProfesor) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("SELECT * FROM tutorias.anotacion where \"codigoProfesor\" = ?");
+			ps.setString(1, codigoProfesor);
+			cargaAnotacion = ps.executeQuery();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarTutoria(int idAnotacion) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("DELETE FROM tutorias.anotacion WHERE \"idAnotacion\" = ?");
+			ps.setInt(1, idAnotacion);
+			ps.execute();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void modificarTutoria(int idAnotacion, String tipo, String texto, String dniAlumno, String fecha, String hora ) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("UPDATE tutorias.anotacion SET tipo=?, texto=?, alumno=?, fecha=?, hora=? WHERE \"idAnotacion\"=?");
+			ps.setString(1, tipo);
+			ps.setString(2, texto);
+			ps.setString(3, dniAlumno);
+			ps.setString(4, fecha);
+			ps.setString(5, hora);
+			ps.setInt(6, idAnotacion);
+			ps.execute();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public int getIdAnotacion() {
 		idAnotacion = 0;

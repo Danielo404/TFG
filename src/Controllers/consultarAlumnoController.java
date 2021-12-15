@@ -73,7 +73,8 @@ public class consultarAlumnoController extends HttpServlet {
         			_alumnoAppService.getNivelIngles(),
         			_alumnoAppService.isErasmus(),
         			_alumnoAppService.getExpLaboral(),
-        			_alumnoAppService.getObservaciones());
+        			_alumnoAppService.getObservaciones(),
+        			_alumnoAppService.getEmail());
         
         session.setAttribute("alumnoResult", alumnoResult);
         

@@ -25,10 +25,11 @@
 			<h1 class="h3 mb-4 text-gray-800">Inicio</h1>
 
 			<div class="row">
+			<% if(moduloResult.get(0).getId() != 0){ %>
 			<% for(int i = 0; i<moduloResult.size();i++){ %>
 			<div class="col-lg-4">
 				<div class="card p-3" style="width: 100%!important;">
-					<img class="card-img-top w-100" src="/TFG/img/modulo1.jpg" alt="Card image cap">
+					<img class="card-img-top w-100" src="/TFG/img/mod_<%= moduloResult.get(i).getId()%>.jpg" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title"><%= moduloResult.get(i).getSiglas() %></h5>
 						<p class="card-text"><%= moduloResult.get(i).getNombre()%></p>
@@ -36,6 +37,7 @@
 					</div>
 				</div>
 				</div>
+				<%} %>
 				<%} %>
 			</div>
 		</div>
