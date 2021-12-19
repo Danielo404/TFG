@@ -90,6 +90,19 @@ public class moduloAppService {
 		}
 	}
 	
+	public void consultarModuloAlumno(String dni) {
+		try {
+			establecerConexion();
+			ps = conexion.prepareStatement("SELECT * FROM tutorias.alumnadomodulo where dni = ?");
+			ps.setString(1, dni);
+			cargaModulo = ps.executeQuery();
+			cargaModulo.next();
+			cerrarConexion();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void consultarModuloGrupo(String grupo) {
 		try {
 			establecerConexion();

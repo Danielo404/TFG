@@ -13,7 +13,7 @@
         <link rel="icon" type="image/png" href="/TFG/img/journal-whills-solid.png">
         
         
-        <title>SB Admin 2 - ${param.tituloPagina}</title>
+        <title>Declive EV - ${param.tituloPagina}</title>
 
         <!-- Custom fonts for this template-->
         <link href="/TFG/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

@@ -64,7 +64,7 @@
                                             <div class="container-fluid">
                                             	<div class="row">
                                             		<div class="col-lg-9"><a href="consultarAlumno?dni=<%= alumnoResult.get(i).getDni() %>" class="btn btn-primary w-100 text-center">Ver datos del alumno...</a></div>
-                                            		<div class="col-lg-3"><a href="borrarAlumno?dni=<%=alumnoResult.get(i).getDni() %>" class="btn btn-danger w-100" title="Eliminar Alumno"><i class="fas fa-trash-alt"></i></a></div>
+                                            		<div class="col-lg-3"><a href="javascript:eliminarAlumnoAdmin('<%=alumnoResult.get(i).getDni() %>')" class="btn btn-danger w-100" title="Eliminar Alumno"><i class="fas fa-trash-alt"></i></a></div>
                                             	</div>
                                             </div>
                                              </td>

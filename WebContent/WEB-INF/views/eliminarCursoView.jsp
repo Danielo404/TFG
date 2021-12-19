@@ -38,7 +38,7 @@
 				</div>
 				<div class="row mt-3">
 					<div class="col-lg-12">
-						<form method="POST">
+						<form method="POST" id="formCurso">
 							<div class="form-group ">
 								<label for="pCurso">Curso</label>
 								 <select id="pCurso"
@@ -50,7 +50,7 @@
 									
 								</select>
 							</div>
-							<button type="submit" class="btn btn-danger w-100">Eliminar curso</button>
+							<a href="javascript:eliminarCursoAdmin()" class="btn btn-danger w-100">Eliminar curso</a>
 						</form>
 					</div>
 				</div>

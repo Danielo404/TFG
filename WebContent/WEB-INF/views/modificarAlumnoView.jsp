@@ -34,7 +34,7 @@
       <div class="input-group-prepend">
         <div class="input-group-text">DNI</div>
       </div> 
-      <input id="pdni" name="pdni" placeholder="DNI" type="text" required="required" class="form-control" value="<%= alumnoResult.getDni() %>">
+      <input id="pdni" name="pdni" placeholder="DNI" type="text" required="required" class="form-control" readonly value="<%= alumnoResult.getDni() %>">
     </div>
   </div>
   <div class="form-group">

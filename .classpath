@@ -9,12 +9,13 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="F:/DESCARGAS/wetransfer_librerias_2021-10-03_1350/javax.servlet-api-3.1.0.jar"/>
-	<classpathentry kind="lib" path="F:/DESCARGAS/wetransfer_librerias_2021-10-03_1350/postgresql.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Danielo/Desktop/librerias/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Danielo/Desktop/librerias/activation.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Danielo/Desktop/librerias/commons-fileupload-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Danielo/Desktop/librerias/commons-io-2.11.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Danielo/Desktop/librerias/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTO/librerias/activation.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTO/librerias/commons-fileupload-1.4.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTO/librerias/commons-io-2.11.0.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTO/librerias/itext-5.0.1.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTO/librerias/javax.mail.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTO/librerias/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTO/librerias/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="D:/PROYECTO/librerias/postgresql.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

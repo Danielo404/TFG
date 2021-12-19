@@ -25,7 +25,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-3">
-						<img src="/TFG/img/al_<%=alumnoResult.getDni() %>.png" class="w-75 rounded img-center-custom">
+						<img src="/TFG/img/alumno.png" class="w-75 rounded img-center-custom">
 					</div>
 					<div class="col-lg-9">
 						<div class="row">
@@ -187,19 +187,28 @@
 						</div>
 					</div>
 				</div>
+				<% if(session.getAttribute("grupoTutorizaProfesor") != null){ %>
+				<% String grupoTutorizProfesor = (String)session.getAttribute("grupoTutorizaProfesor");
+						if(grupoTutorizProfesor.equals(alumnoResult.getGrupo())) { %>
 				<div class="row">
 					<div class="col-lg-6" name="">
-					<%if(session.getAttribute("grupoTutorizaProfesor") != null){ %>
-						<% String grupoTutorizProfesor = (String)session.getAttribute("grupoTutorizaProfesor");
-						if(grupoTutorizProfesor.equals(alumnoResult.getGrupo())) { %>
+					
+						
 						<a href="crearTutoria?dni=<%= alumnoResult.getDni() %>" class="btn btn-primary w-100 p-3">Concertar tutoría</a>
-						<%} %>
-						<%} %>
+						
+						
 					</div>
 					<div class="col-lg-6" name="">
 						<a href="modificarAlumno?dni=<%= alumnoResult.getDni() %>" class="btn btn-primary w-100 p-3">Modificar datos del alumno</a>
 					</div>
 				</div>
+				<div class="row justify-content-center mt-3">
+					<div class="col-lg-6" name="">
+						<a href="descargarInforme?dni=<%= alumnoResult.getDni() %>" class="btn btn-primary w-100 p-3">Descargar informe</a>
+					</div>
+				</div>
+				<%} %>
+				<%} %>
 			</div>
 
 		</div>

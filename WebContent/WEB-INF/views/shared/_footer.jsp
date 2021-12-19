@@ -4,7 +4,7 @@
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright &copy; </span>
+                <span>Copyright &copy; Daniel Rodríguez Palacios - 2º DAW </span>
             </div>
         </div>
     </footer>
@@ -51,6 +51,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/TFG/js/sb-admin-2.min.js"></script>
+    <script src="/TFG/js/sb-admin-2.js"></script>
 
     <!-- Page level plugins -->
     <script src="/TFG/vendor/datatables/jquery.dataTables.min.js"></script>

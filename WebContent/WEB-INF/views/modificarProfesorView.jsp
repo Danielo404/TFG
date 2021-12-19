@@ -26,7 +26,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-3">
-						<img src="/TFG/img/default_profile.png" class="w-75 rounded img-center-custom">
+						<img src="/TFG/img/profesor.png" class="w-75 rounded img-center-custom">
 					</div>
 					<div class="col-lg-9">
 						<div class="row">
