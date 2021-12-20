@@ -1,11 +1,17 @@
 package Controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import AppServices.moduloAppService;
+import Models.moduloModel;
 
 /**
  * Servlet implementation class Prueba
@@ -17,16 +23,26 @@ public class Prueba extends HttpServlet {
     /**
      * Default constructor. 
      */
-    public Prueba() {
-        // TODO Auto-generated constructor stub
-    }
+	HttpSession session;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/Prueba.jsp").forward(request, response);
+		ArrayList<moduloModel> moduloResult = new ArrayList<moduloModel>();
+		
+		moduloAppService _moduloAppService = new moduloAppService();
+		
+		session = request.getSession(true);
+		_moduloAppService.consultarModulos();
+		do {
+			moduloResult.add(new moduloModel(_moduloAppService.getId(), _moduloAppService.getNombre(), _moduloAppService.getnHoras(), _moduloAppService.getSiglas()));
+		} while(_moduloAppService.consultarSiguiente());
+		
+		session.setAttribute("moduloResult", moduloResult);
+		
+		request.getRequestDispatcher("WEB-INF/views/__plantilla.jsp").forward(request, response);
 	}
 
 	/**
